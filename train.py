@@ -8,7 +8,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 
-
+# === Load train data & Data pre-processing ===
 train_df = pd.read_csv('./kaggle/train.csv')
 numerics_col_list = list(train_df.select_dtypes(include=['int16', 'int32', 'int64', 'float16', 'float32', 'float64']).columns)
 cat_col_list = list(set(train_df.columns)-set(numerics_col_list))
@@ -26,29 +26,8 @@ x_data = train_df.drop(['failure'], axis=1).values
 y_data = train_df['failure'].values
 
 
-# === Load train data & Data pre-processing ===
-'''
-train_df = pd.read_csv('./kaggle/train.csv')
-train_df = train_df.dropna()
-x_data = train_df.drop(labels=["failure", "product_code", "id", "attribute_1", "attribute_2", "attribute_3",], axis="columns")
-x_data = x_data.values
-y_data = train_df['failure'].values
 
-for i in range(len(x_data)):
-    if (x_data[i][1] == "material_5"):
-        x_data[i][1] = 0
-    else:
-        x_data[i][1] = 1
 
-null = []
-for col in range(len(x_data[0])):
-    for i in range(len(x_data)):
-        if np.isnan(x_data[i][col]):
-            null.append(i)
-            x_data[i][col] = 0
-    avg = np.mean(x_data[:, col])
-    x_data[null, col] = avg
-'''
 
 # ============== kfold data =================
 KFOLD = 5

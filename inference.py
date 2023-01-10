@@ -25,27 +25,6 @@ test_df = pd.DataFrame(transformer.fit_transform(test_df), columns=(numerics_col
 test_data = test_df.drop(labels = ['product_code','id', 'attribute_1', 'attribute_2', 'attribute_3'], axis=1).values
 
 
-'''
-test_df = pd.read_csv('./kaggle/test.csv')
-test_idx = test_df["id"].values
-test_data = test_df.drop(labels=["id", "product_code", "attribute_1", "attribute_2", "attribute_3"], axis="columns")
-test_data = test_data.values
-
-for i in range(len(test_data)):
-    if (test_data[i][1] == "material_5"):
-        test_data[i][1] = 0
-    else:
-        test_data[i][1] = 1
-        
-null = []
-for col in range(len(test_data[0])):
-    for i in range(len(test_data)):
-        if np.isnan(test_data[i][col]):
-            null.append(i)
-            test_data[i][col] = 0
-    avg = np.mean(test_data[:, col])
-    test_data[null, col] = avg
-'''
 
 # ==== Load pre-trained model ==== 
 clf = XGBClassifier()
